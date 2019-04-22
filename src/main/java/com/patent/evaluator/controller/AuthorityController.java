@@ -7,6 +7,8 @@ import com.patent.evaluator.dto.*;
 import com.patent.evaluator.pageablesearch.model.PageableSearchFilterDto;
 import com.patent.evaluator.service.api.AuthorityRules;
 import com.patent.evaluator.service.api.AuthorityService;
+import com.patent.evaluator.service.impl.AuthorityMapper;
+import com.patent.evaluator.service.impl.AuthorityResponseDtoMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.http.HttpStatus;
@@ -15,7 +17,6 @@ import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
-import java.util.ArrayList;
 import java.util.List;
 
 @RestController
@@ -62,16 +63,14 @@ public class AuthorityController {
     @GetMapping(value = "getAllAuthorities")
     @PreAuthorize("@CheckPermission.hasPermission(authentication)")
     public ResponseEntity getAllAuthorities() {
-//        List<AuthorityResponse> authorityResponses = AuthorityMapper.INSTANCE.entityListToDtoList(authorityRules.readAll());
-        List<AuthorityResponse> authorityResponses = new ArrayList<>();
+        List<AuthorityResponse> authorityResponses = AuthorityMapper.INSTANCE.entityListToDtoList(authorityRules.readAll());
         return new ResponseEntity<>(authorityResponses, HttpStatus.OK);
     }
 
     @GetMapping(value = "getAll")
     @PreAuthorize("@CheckPermission.hasPermission(authentication)")
     public ResponseEntity getAll() {
-//        List<AuthorityResponseDto> authorityResponseDtos = AuthorityResponseDtoMapper.INSTANCE.entityListToDtoList(authorityRules.readAllAuthority());
-        List<AuthorityResponseDto> authorityResponseDtos = new ArrayList<>();
+        List<AuthorityResponseDto> authorityResponseDtos = AuthorityResponseDtoMapper.INSTANCE.entityListToDtoList(authorityRules.readAllAuthority());
         return new ResponseEntity<>(authorityResponseDtos, HttpStatus.OK);
     }
 
