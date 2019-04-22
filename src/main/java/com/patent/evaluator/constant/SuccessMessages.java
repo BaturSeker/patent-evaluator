@@ -28,4 +28,17 @@ public final class SuccessMessages {
 
     public static final String RESET_PASSWORD_TITLE = "Şifre Sıfırlama";
     public static final String RESET_PASSWORD_MESSAGE = "Şifre başarılı bir şekilde sıfırlanmıştır.";
+
+    //  # GENERIC
+    public static final String GENERIC_TYPE_CREATE_TITLE = "Genel Tip oluşturma";
+    public static final String GENERIC_TYPE_CREATE_MESSAGE = "Genel Tip başarılı bir şekilde oluşturuldu.";
+
+    public static final String GENERIC_TYPE_VALUE_CREATE_TITLE = "Genel Tip değeri oluşturma";
+    public static final String GENERIC_TYPE_VALUE_CREATE_MESSAGE = "Genel Tip değeri başarılı bir şekilde oluşturuldu.";
+
+    public static final String GENERIC_TYPE_UPDATE_TITLE = "Genel tip güncelleme";
+    public static final String GENERIC_TYPE_UPDATE_MESSAGE = "Genel tip başarılı bir şekilde güncellendi.";
+
+    public static final String GENERIC_TYPE_VALUE_UPDATE_TITLE = "Genel Tip değeri güncelleme";
+    public static final String GENERIC_TYPE_VALUE_UPDATE_MESSAGE = "Genel Tip değeri başarılı bir şekilde güncellendi.";
 }
