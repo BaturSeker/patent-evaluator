@@ -1,4 +1,4 @@
-package com.patent.evaluator.service.impl;
+package com.patent.evaluator.service.impl.usertoken;
 
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpRequest;

@@ -2,7 +2,7 @@ package com.patent.evaluator.security;
 
 import com.patent.evaluator.dao.UsersRepository;
 import com.patent.evaluator.domain.Users;
-import com.patent.evaluator.service.api.AuthorityListRules;
+import com.patent.evaluator.service.api.authority.AuthorityListRules;
 import com.patent.evaluator.service.impl.usertoken.UserTokenHolderServiceImpl;
 import io.jsonwebtoken.ExpiredJwtException;
 import org.slf4j.Logger;
@@ -45,9 +45,9 @@ public class JwtFilter extends OncePerRequestFilter {
             try {
                 username = jwtUtil.getUsernameFromToken(authToken);
             } catch (IllegalArgumentException e) {
-                log.error("an error occured during getting username from token", e);
+                log.error("an error occured during getting username from usertoken", e);
             } catch (ExpiredJwtException e) {
-                log.warn("this token is expired and not valid anymore", e);
+                log.warn("this usertoken is expired and not valid anymore", e);
             }
         } else {
             log.warn("could not find bearer string, will ignore the header");

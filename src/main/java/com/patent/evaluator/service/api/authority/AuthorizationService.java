@@ -1,4 +1,4 @@
-package com.patent.evaluator.service.api;
+package com.patent.evaluator.service.api.authority;
 
 import com.patent.evaluator.domain.UserRole;
 

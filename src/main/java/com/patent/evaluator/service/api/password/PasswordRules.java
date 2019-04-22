@@ -1,4 +1,4 @@
-package com.patent.evaluator.service.api;
+package com.patent.evaluator.service.api.password;
 
 import com.patent.evaluator.domain.Users;
 import com.patent.evaluator.dto.SetNewPasswordRequest;

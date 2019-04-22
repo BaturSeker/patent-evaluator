@@ -1,4 +1,4 @@
-package com.patent.evaluator.service.impl;
+package com.patent.evaluator.service.impl.authority;
 
 import com.patent.evaluator.config.mapper.GeneralMapStructConfig;
 import com.patent.evaluator.domain.Authority;

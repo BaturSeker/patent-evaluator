@@ -1,12 +1,12 @@
-package com.patent.evaluator.service.impl;
+package com.patent.evaluator.service.impl.login;
 
 
 import com.patent.evaluator.constant.ValidationMessages;
 import com.patent.evaluator.domain.Users;
 import com.patent.evaluator.dto.LoginRequest;
-import com.patent.evaluator.service.api.LoginRules;
-import com.patent.evaluator.service.api.LoginService;
-import com.patent.evaluator.service.api.PasswordRules;
+import com.patent.evaluator.service.api.login.LoginRules;
+import com.patent.evaluator.service.api.login.LoginService;
+import com.patent.evaluator.service.api.password.PasswordRules;
 import com.patent.evaluator.util.ValidationHelper;
 import com.patent.evaluator.util.exception.ValidationException;
 import org.springframework.beans.factory.annotation.Autowired;

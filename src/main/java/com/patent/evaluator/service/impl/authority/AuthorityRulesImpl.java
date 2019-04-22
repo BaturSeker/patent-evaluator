@@ -1,4 +1,4 @@
-package com.patent.evaluator.service.impl;
+package com.patent.evaluator.service.impl.authority;
 
 
 import com.patent.evaluator.constant.ValidationMessages;
@@ -7,8 +7,8 @@ import com.patent.evaluator.domain.Users;
 import com.patent.evaluator.dto.AuthorityRequest;
 import com.patent.evaluator.dto.AuthorityResponse;
 import com.patent.evaluator.dto.RoleAuthorityRequest;
-import com.patent.evaluator.service.api.AuthorityRules;
-import com.patent.evaluator.service.api.AuthorityService;
+import com.patent.evaluator.service.api.authority.AuthorityRules;
+import com.patent.evaluator.service.api.authority.AuthorityService;
 import com.patent.evaluator.util.ValidationHelper;
 import com.patent.evaluator.util.exception.NullObjectException;
 import com.patent.evaluator.util.exception.ValidationException;

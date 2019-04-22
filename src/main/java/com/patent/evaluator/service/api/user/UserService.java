@@ -1,4 +1,4 @@
-package com.patent.evaluator.service.api;
+package com.patent.evaluator.service.api.user;
 
 import com.patent.evaluator.domain.Roles;
 import com.patent.evaluator.domain.Users;

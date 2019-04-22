@@ -1,8 +1,8 @@
-package com.patent.evaluator.service.impl;
+package com.patent.evaluator.service.impl.authority;
 
 import com.patent.evaluator.domain.*;
-import com.patent.evaluator.service.api.AuthorityListRules;
-import com.patent.evaluator.service.api.AuthorizationService;
+import com.patent.evaluator.service.api.authority.AuthorityListRules;
+import com.patent.evaluator.service.api.authority.AuthorizationService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;

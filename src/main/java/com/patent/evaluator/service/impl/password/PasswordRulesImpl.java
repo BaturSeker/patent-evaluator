@@ -1,12 +1,12 @@
-package com.patent.evaluator.service.impl;
+package com.patent.evaluator.service.impl.password;
 
 import com.patent.evaluator.constant.ExceptionMessages;
 import com.patent.evaluator.domain.Users;
 import com.patent.evaluator.dto.SetNewPasswordRequest;
 import com.patent.evaluator.dto.UserRequest;
-import com.patent.evaluator.service.api.PasswordRules;
-import com.patent.evaluator.service.api.UserRules;
-import com.patent.evaluator.service.api.UserService;
+import com.patent.evaluator.service.api.password.PasswordRules;
+import com.patent.evaluator.service.api.user.UserRules;
+import com.patent.evaluator.service.api.user.UserService;
 import com.patent.evaluator.util.CalendarHelper;
 import com.patent.evaluator.util.HashUtils;
 import com.patent.evaluator.util.PasswordGenerator;

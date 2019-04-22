@@ -1,9 +1,9 @@
-package com.patent.evaluator.service.impl;
+package com.patent.evaluator.service.impl.authority;
 
 import com.patent.evaluator.dao.UserRoleRepository;
 import com.patent.evaluator.dao.UsersRepository;
 import com.patent.evaluator.domain.UserRole;
-import com.patent.evaluator.service.api.AuthorizationService;
+import com.patent.evaluator.service.api.authority.AuthorizationService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

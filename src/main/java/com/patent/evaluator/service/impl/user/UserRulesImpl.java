@@ -1,4 +1,4 @@
-package com.patent.evaluator.service.impl;
+package com.patent.evaluator.service.impl.user;
 
 import com.patent.evaluator.constant.ValidationMessages;
 import com.patent.evaluator.domain.Roles;
@@ -6,8 +6,8 @@ import com.patent.evaluator.domain.Users;
 import com.patent.evaluator.dto.ResetPasswordDto;
 import com.patent.evaluator.dto.UserInfoResponse;
 import com.patent.evaluator.pageablesearch.model.PageableSearchFilterDto;
-import com.patent.evaluator.service.api.UserRules;
-import com.patent.evaluator.service.api.UserService;
+import com.patent.evaluator.service.api.user.UserRules;
+import com.patent.evaluator.service.api.user.UserService;
 import com.patent.evaluator.util.ValidationHelper;
 import com.patent.evaluator.util.exception.ValidationException;
 import org.springframework.beans.factory.annotation.Autowired;

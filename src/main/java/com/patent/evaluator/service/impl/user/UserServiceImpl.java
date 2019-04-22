@@ -1,4 +1,4 @@
-package com.patent.evaluator.service.impl;
+package com.patent.evaluator.service.impl.user;
 
 import com.patent.evaluator.dao.UserRoleRepository;
 import com.patent.evaluator.dao.UsersRepository;
@@ -8,7 +8,7 @@ import com.patent.evaluator.domain.Users;
 import com.patent.evaluator.dto.ResetPasswordDto;
 import com.patent.evaluator.dto.UserInfoResponse;
 import com.patent.evaluator.pageablesearch.model.PageableSearchFilterDto;
-import com.patent.evaluator.service.api.UserService;
+import com.patent.evaluator.service.api.user.UserService;
 import com.patent.evaluator.util.ComboResponseBuilder;
 import com.patent.evaluator.util.HashUtils;
 import com.patent.evaluator.util.PasswordGenerator;

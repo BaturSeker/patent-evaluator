@@ -1,4 +1,4 @@
-package com.patent.evaluator.service.impl;
+package com.patent.evaluator.service.impl.authority;
 
 
 import com.patent.evaluator.constant.ExceptionMessages;
@@ -14,7 +14,7 @@ import com.patent.evaluator.pageablesearch.model.BaseSortRequest;
 import com.patent.evaluator.pageablesearch.model.PageRequestDto;
 import com.patent.evaluator.pageablesearch.model.PageableSearchFilterDto;
 import com.patent.evaluator.pageablesearch.specification.SearchSpecificationBuilder;
-import com.patent.evaluator.service.api.AuthorityService;
+import com.patent.evaluator.service.api.authority.AuthorityService;
 import com.patent.evaluator.util.CalendarHelper;
 import com.patent.evaluator.util.exception.NullObjectException;
 import org.apache.commons.collections4.IteratorUtils;
