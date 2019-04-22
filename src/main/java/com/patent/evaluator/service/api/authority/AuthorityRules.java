@@ -2,9 +2,9 @@ package com.patent.evaluator.service.api.authority;
 
 import com.patent.evaluator.domain.Authority;
 import com.patent.evaluator.domain.Users;
-import com.patent.evaluator.dto.AuthorityRequestDto;
-import com.patent.evaluator.dto.AuthorityResponse;
-import com.patent.evaluator.dto.RoleAuthorityRequestDto;
+import com.patent.evaluator.dto.authority.AuthorityRequestDto;
+import com.patent.evaluator.dto.authority.AuthorityResponse;
+import com.patent.evaluator.dto.authority.RoleAuthorityRequestDto;
 
 import java.util.List;
 

@@ -2,7 +2,7 @@ package com.patent.evaluator.service.impl.authority;
 
 import com.patent.evaluator.config.mapper.GeneralMapStructConfig;
 import com.patent.evaluator.domain.Authority;
-import com.patent.evaluator.dto.AuthorityResponse;
+import com.patent.evaluator.dto.authority.AuthorityResponse;
 import org.mapstruct.InheritInverseConfiguration;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;

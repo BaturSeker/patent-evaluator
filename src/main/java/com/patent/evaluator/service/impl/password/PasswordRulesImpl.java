@@ -2,8 +2,8 @@ package com.patent.evaluator.service.impl.password;
 
 import com.patent.evaluator.constant.ExceptionMessages;
 import com.patent.evaluator.domain.Users;
-import com.patent.evaluator.dto.SetNewPasswordRequestDto;
-import com.patent.evaluator.dto.UserRequestDto;
+import com.patent.evaluator.dto.password.SetNewPasswordRequestDto;
+import com.patent.evaluator.dto.user.UserRequestDto;
 import com.patent.evaluator.service.api.password.PasswordRules;
 import com.patent.evaluator.service.api.user.UserRules;
 import com.patent.evaluator.service.api.user.UserService;

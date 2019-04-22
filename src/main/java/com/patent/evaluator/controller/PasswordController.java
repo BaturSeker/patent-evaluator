@@ -2,9 +2,9 @@ package com.patent.evaluator.controller;
 
 
 import com.patent.evaluator.constant.SuccessMessages;
-import com.patent.evaluator.dto.SetNewPasswordRequestDto;
+import com.patent.evaluator.dto.password.SetNewPasswordRequestDto;
 import com.patent.evaluator.dto.SuccessResponseDto;
-import com.patent.evaluator.dto.UserRequestDto;
+import com.patent.evaluator.dto.user.UserRequestDto;
 import com.patent.evaluator.service.api.password.PasswordRules;
 import com.patent.evaluator.util.PasswordGenerator;
 import org.springframework.beans.factory.annotation.Autowired;

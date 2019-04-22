@@ -1,7 +1,7 @@
 package com.patent.evaluator.service.api.login;
 
 import com.patent.evaluator.domain.Users;
-import com.patent.evaluator.dto.LoginRequestDto;
+import com.patent.evaluator.dto.login.LoginRequestDto;
 
 public interface LoginService {
 

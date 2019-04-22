@@ -1,4 +1,6 @@
-package com.patent.evaluator.dto;
+package com.patent.evaluator.dto.login;
+
+import com.patent.evaluator.dto.authority.AuthorityResponse;
 
 import java.util.List;
 

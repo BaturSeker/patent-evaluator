@@ -1,8 +1,8 @@
 package com.patent.evaluator.service.api.password;
 
 import com.patent.evaluator.domain.Users;
-import com.patent.evaluator.dto.SetNewPasswordRequestDto;
-import com.patent.evaluator.dto.UserRequestDto;
+import com.patent.evaluator.dto.password.SetNewPasswordRequestDto;
+import com.patent.evaluator.dto.user.UserRequestDto;
 
 import java.security.NoSuchAlgorithmException;
 import java.util.List;

@@ -4,6 +4,7 @@ package com.patent.evaluator.controller;
 import com.patent.evaluator.constant.SuccessMessages;
 import com.patent.evaluator.domain.Authority;
 import com.patent.evaluator.dto.*;
+import com.patent.evaluator.dto.authority.*;
 import com.patent.evaluator.pageablesearch.model.PageableSearchFilterDto;
 import com.patent.evaluator.service.api.authority.AuthorityRules;
 import com.patent.evaluator.service.api.authority.AuthorityService;

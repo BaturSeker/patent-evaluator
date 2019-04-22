@@ -1,4 +1,4 @@
-package com.patent.evaluator.dto;
+package com.patent.evaluator.dto.login;
 
 public class LoginUserResponseDto {
 

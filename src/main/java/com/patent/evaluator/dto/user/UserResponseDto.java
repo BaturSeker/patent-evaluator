@@ -1,4 +1,4 @@
-package com.patent.evaluator.dto;
+package com.patent.evaluator.dto.user;
 
 public class UserResponseDto {
     private Long userId;

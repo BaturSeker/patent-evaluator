@@ -3,7 +3,7 @@ package com.patent.evaluator.service.impl.login;
 
 import com.patent.evaluator.constant.ValidationMessages;
 import com.patent.evaluator.domain.Users;
-import com.patent.evaluator.dto.LoginRequestDto;
+import com.patent.evaluator.dto.login.LoginRequestDto;
 import com.patent.evaluator.service.api.login.LoginRules;
 import com.patent.evaluator.service.api.login.LoginService;
 import com.patent.evaluator.service.api.password.PasswordRules;

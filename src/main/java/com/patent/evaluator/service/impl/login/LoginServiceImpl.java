@@ -5,7 +5,7 @@ import com.patent.evaluator.constant.Constants;
 import com.patent.evaluator.constant.ExceptionMessages;
 import com.patent.evaluator.dao.UsersRepository;
 import com.patent.evaluator.domain.Users;
-import com.patent.evaluator.dto.LoginRequestDto;
+import com.patent.evaluator.dto.login.LoginRequestDto;
 import com.patent.evaluator.service.api.login.LoginService;
 import com.patent.evaluator.util.CalendarHelper;
 import com.patent.evaluator.util.HashUtils;
