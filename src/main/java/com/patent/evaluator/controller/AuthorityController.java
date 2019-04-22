@@ -21,14 +21,8 @@ import java.util.List;
 @RestController
 @RequestMapping("/rest/authority/")
 public class AuthorityController {
-    private final AuthorityRules authorityRules;
-    private final AuthorityService authorityService;
-
-    @Autowired
-    public AuthorityController(AuthorityRules authorityRules, AuthorityService authorityService) {
-        this.authorityRules = authorityRules;
-        this.authorityService = authorityService;
-    }
+    private AuthorityRules authorityRules;
+    private AuthorityService authorityService;
 
     @GetMapping(value = "{authorityId}")
     @PreAuthorize("@CheckPermission.hasPermission(authentication)")
@@ -86,6 +80,16 @@ public class AuthorityController {
     public ResponseEntity<Page<AuthorityPageDto>> getAuthorityPage(@RequestBody PageableSearchFilterDto pageRequest) {
         Page<AuthorityPageDto> response = authorityService.getAll(pageRequest);
         return ResponseEntity.ok(response);
+    }
+
+    @Autowired
+    public void setAuthorityRules(AuthorityRules authorityRules) {
+        this.authorityRules = authorityRules;
+    }
+
+    @Autowired
+    public void setAuthorityService(AuthorityService authorityService) {
+        this.authorityService = authorityService;
     }
 }
 

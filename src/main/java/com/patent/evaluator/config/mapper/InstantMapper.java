@@ -1,4 +1,4 @@
-package com.patent.evaluator.service.impl.mapper;
+package com.patent.evaluator.config.mapper;
 
 import java.time.Instant;
 

@@ -1,6 +1,7 @@
-package com.patent.evaluator.service.impl;
+package com.patent.evaluator.service.impl.usertoken;
 
-import com.patent.evaluator.service.impl.security.RestTemplateResponseErrorHandler;
+import com.patent.evaluator.config.RestTemplateResponseErrorHandler;
+import com.patent.evaluator.service.impl.TokenInjectInterceptor;
 import org.springframework.context.annotation.Scope;
 import org.springframework.context.annotation.ScopedProxyMode;
 import org.springframework.stereotype.Component;

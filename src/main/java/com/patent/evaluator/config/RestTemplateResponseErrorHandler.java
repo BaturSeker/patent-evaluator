@@ -1,4 +1,4 @@
-package com.patent.evaluator.service.impl.security;
+package com.patent.evaluator.config;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.patent.evaluator.dto.ExceptionHandlerDto;

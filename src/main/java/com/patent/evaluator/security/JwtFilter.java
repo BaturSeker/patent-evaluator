@@ -3,7 +3,7 @@ package com.patent.evaluator.security;
 import com.patent.evaluator.dao.UsersRepository;
 import com.patent.evaluator.domain.Users;
 import com.patent.evaluator.service.api.AuthorityListRules;
-import com.patent.evaluator.service.impl.UserTokenHolderServiceImpl;
+import com.patent.evaluator.service.impl.usertoken.UserTokenHolderServiceImpl;
 import io.jsonwebtoken.ExpiredJwtException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
