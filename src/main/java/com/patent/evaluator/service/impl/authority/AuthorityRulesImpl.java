@@ -14,11 +14,14 @@ import com.patent.evaluator.util.exception.NullObjectException;
 import com.patent.evaluator.util.exception.ValidationException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Propagation;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 import java.util.Objects;
 
 @Service
+@Transactional(rollbackFor = Exception.class)
 public class AuthorityRulesImpl implements AuthorityRules {
 
     private AuthorityService authorityService;
@@ -94,6 +97,7 @@ public class AuthorityRulesImpl implements AuthorityRules {
     }
 
     @Override
+    @Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
     public Authority read(Long authorityId) {
         StringBuilder message = new StringBuilder();
         boolean isValid = true;
@@ -109,6 +113,7 @@ public class AuthorityRulesImpl implements AuthorityRules {
     }
 
     @Override
+    @Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
     public List<Authority> readAll() throws NullObjectException {
         return authorityService.readAll();
     }
@@ -136,32 +141,38 @@ public class AuthorityRulesImpl implements AuthorityRules {
     }
 
     @Override
+    @Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
     public List<Authority> getUserAuthorities(Users users) {
         return this.authorityService.getUserAuthorities(users);
     }
 
 
     @Override
+    @Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
     public List<Authority> getAnonymousUserAuthorities() {
         return this.authorityService.getAnonymousUserAuthorities();
     }
 
     @Override
+    @Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
     public Authority findByAuthorityCode(String authorityCode) {
         return null;
     }
 
     @Override
+    @Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
     public List<Authority> readAllAuthority() {
         return this.authorityService.readAllAuthority();
     }
 
     @Override
+    @Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
     public List<AuthorityResponse> findAuthoritiesByRoleId(Long roleId) {
         return this.authorityService.findAuthoritiesByRoleId(roleId);
     }
 
     @Override
+    @Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
     public boolean shouldIconExist(Long authorityId) {
         Authority authority = read(authorityId);
         if (authority.getParentAuthority() != null) {

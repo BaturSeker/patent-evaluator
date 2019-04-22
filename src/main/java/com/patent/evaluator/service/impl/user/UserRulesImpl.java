@@ -14,12 +14,15 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Propagation;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.security.NoSuchAlgorithmException;
 import java.util.List;
 import java.util.Objects;
 
 @Service
+@Transactional(rollbackFor = Exception.class)
 public class UserRulesImpl implements UserRules {
 
     private UserService userService;
@@ -58,6 +61,7 @@ public class UserRulesImpl implements UserRules {
     }
 
     @Override
+    @Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
     public Users getUser(Long userId) {
         boolean isValid = true;
         StringBuilder message = new StringBuilder();
@@ -73,26 +77,31 @@ public class UserRulesImpl implements UserRules {
     }
 
     @Override
+    @Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
     public Page<UserInfoResponseDto> getUsersFiltered(PageableSearchFilterDto filterDto) {
         return userService.getUsersFiltered(filterDto);
     }
 
     @Override
+    @Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
     public List<Users> read() {
         return userService.getAllUsers();
     }
 
     @Override
+    @Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
     public List getComboUsers() {
         return userService.getComboUsers();
     }
 
     @Override
+    @Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
     public Page<UserInfoResponseDto> getUserInfoPage(PageRequest pageRequest) {
         return userService.getUserInfoPage(pageRequest);
     }
 
     @Override
+    @Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
     public List<Users> findByRole(Roles role) {
         return this.userService.findByRole(role);
     }
@@ -103,6 +112,7 @@ public class UserRulesImpl implements UserRules {
     }
 
     @Override
+    @Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
     public List<Users> getAllUser(Integer locationId) {
         return this.userService.getAllUser(locationId);
     }

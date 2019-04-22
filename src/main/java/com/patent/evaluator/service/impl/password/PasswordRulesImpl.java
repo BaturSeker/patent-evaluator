@@ -20,12 +20,15 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.Resource;
 import org.springframework.core.io.ResourceLoader;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Propagation;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.io.IOException;
 import java.security.NoSuchAlgorithmException;
 import java.util.*;
 
 @Service
+@Transactional(rollbackFor = Exception.class)
 public class PasswordRulesImpl implements PasswordRules {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(PasswordRulesImpl.class);
@@ -55,12 +58,14 @@ public class PasswordRulesImpl implements PasswordRules {
     }
 
     @Override
+    @Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
     public boolean isPasswordValid(String password) {
         basePasswordRules(password);
         return true;
     }
 
     @Override
+    @Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
     public boolean isUsernamePasswordValid(String username, String password) {
         StringBuilder messages = new StringBuilder();
         boolean isValidPass = true;
@@ -210,6 +215,7 @@ public class PasswordRulesImpl implements PasswordRules {
     }
 
     @Override
+    @Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
     public void checkSlangWord(String password) {
         boolean isValidPass = true;
         StringBuilder messages = new StringBuilder();

@@ -10,10 +10,13 @@ import com.patent.evaluator.util.ValidationHelper;
 import com.patent.evaluator.util.exception.ValidationException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Propagation;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
 @Service
+@Transactional(rollbackFor = Exception.class)
 public class LookupValueRulesImpl implements LookupValueRules {
     private LookupValueService lookupValueService;
 
@@ -65,6 +68,7 @@ public class LookupValueRulesImpl implements LookupValueRules {
     }
 
     @Override
+    @Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
     public LookupValue read(Integer genericTypeValueId) {
         StringBuilder messages = new StringBuilder();
         boolean isValid = true;
@@ -80,6 +84,7 @@ public class LookupValueRulesImpl implements LookupValueRules {
     }
 
     @Override
+    @Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
     public List getComboLookupValues(Integer lookupTypeValueId) {
         StringBuilder messages = new StringBuilder();
         boolean isValid = true;
@@ -95,16 +100,19 @@ public class LookupValueRulesImpl implements LookupValueRules {
     }
 
     @Override
+    @Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
     public List<LookupValue> readAll() {
         return lookupValueService.readAll();
     }
 
     @Override
+    @Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
     public List<LookupValue> readAllByLookupTypeId(Integer genericTypeId) {
         return lookupValueService.readAllByLookupTypeId(genericTypeId);
     }
 
     @Override
+    @Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
     public List<LookupValue> readAllIcons() {
         return lookupValueService.readAllIcon();
     }

@@ -12,10 +12,13 @@ import com.patent.evaluator.util.exception.ValidationException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Propagation;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
 @Service
+@Transactional(rollbackFor = Exception.class)
 public class LookupTypeRulesImpl implements LookupTypeRules {
 
     private LookupTypeService lookupTypeService;
@@ -58,6 +61,7 @@ public class LookupTypeRulesImpl implements LookupTypeRules {
     }
 
     @Override
+    @Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
     public LookupType read(Integer genericTypeId) {
         StringBuilder messages = new StringBuilder();
         boolean isValid = true;
@@ -73,11 +77,13 @@ public class LookupTypeRulesImpl implements LookupTypeRules {
     }
 
     @Override
+    @Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
     public List<LookupType> readAll() {
         return lookupTypeService.readAll();
     }
 
     @Override
+    @Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
     public Page<LookupTypeDto> getAll(PageableSearchFilterDto pageRequest) {
         return lookupTypeService.getAll(pageRequest);
     }

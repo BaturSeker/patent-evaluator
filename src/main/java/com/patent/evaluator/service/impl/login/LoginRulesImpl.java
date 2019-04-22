@@ -11,18 +11,14 @@ import com.patent.evaluator.util.ValidationHelper;
 import com.patent.evaluator.util.exception.ValidationException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 @Service
+@Transactional(rollbackFor = Exception.class)
 public class LoginRulesImpl implements LoginRules {
 
-    private final LoginService loginService;
-    private final PasswordRules passwordRules;
-
-    @Autowired
-    public LoginRulesImpl(LoginService loginService, PasswordRules passwordRules) {
-        this.loginService = loginService;
-        this.passwordRules = passwordRules;
-    }
+    private LoginService loginService;
+    private PasswordRules passwordRules;
 
     @Override
     public Users login(LoginRequestDto loginRequestDto) throws Exception {
@@ -65,6 +61,16 @@ public class LoginRulesImpl implements LoginRules {
             throw new ValidationException(message.toString());
         }
         return loginService.loggedInLDAP(loginRequestDto);
+    }
+
+    @Autowired
+    public void setLoginService(LoginService loginService) {
+        this.loginService = loginService;
+    }
+
+    @Autowired
+    public void setPasswordRules(PasswordRules passwordRules) {
+        this.passwordRules = passwordRules;
     }
 }
 
