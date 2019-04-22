@@ -3,8 +3,8 @@ package com.patent.evaluator.controller;
 import com.patent.evaluator.constant.SuccessMessages;
 import com.patent.evaluator.domain.UserRole;
 import com.patent.evaluator.domain.Users;
-import com.patent.evaluator.dto.password.ResetPasswordDto;
 import com.patent.evaluator.dto.SuccessResponseDto;
+import com.patent.evaluator.dto.password.ResetPasswordDto;
 import com.patent.evaluator.dto.user.UserInfoResponseDto;
 import com.patent.evaluator.dto.user.UserResponseDto;
 import com.patent.evaluator.pageablesearch.model.PageRequestDto;
@@ -66,12 +66,14 @@ public class UserController {
     }
 
     @PostMapping("getAuthorizeList{userId}")
+    @PreAuthorize("@CheckPermission.hasPermission(authentication)")
     public ResponseEntity getAuthorizeList(@Valid @RequestBody Long userId) {
         List<UserRole> userRoleList = authorityListRules.getAuthorizeList(userId);
         return new ResponseEntity<>(userRoleList, HttpStatus.OK);
     }
 
     @GetMapping("getComboUsers")
+    @PreAuthorize("@CheckPermission.hasPermission(authentication)")
     public ResponseEntity getComboUsers() {
         List userList = userRules.getComboUsers();
         return new ResponseEntity<>(userList, HttpStatus.OK);
@@ -90,17 +92,20 @@ public class UserController {
     }
 
     @PostMapping("getUserInfoPage")
+    @PreAuthorize("@CheckPermission.hasPermission(authentication)")
     public ResponseEntity<Page<UserInfoResponseDto>> getUserInfoPage(@RequestBody PageRequestDto pageRequest) {
         return ResponseEntity.ok(userRules.getUserInfoPage(PageRequest.of(pageRequest.getPage(), pageRequest.getSize())));
     }
 
     @PostMapping("getFilteredUsers")
+    @PreAuthorize("@CheckPermission.hasPermission(authentication)")
     public ResponseEntity<Page<UserInfoResponseDto>> getFilteredUsers(@RequestBody PageableSearchFilterDto pageRequest) {
         Page<UserInfoResponseDto> response = userRules.getUsersFiltered(pageRequest);
         return ResponseEntity.ok(response);
     }
 
     @PostMapping("resetPassword")
+    @PreAuthorize("@CheckPermission.hasPermission(authentication)")
     public ResponseEntity resetPassword(@RequestBody ResetPasswordDto resetPasswordDto) {
         String message = null;
         try {
@@ -112,6 +117,7 @@ public class UserController {
     }
 
     @GetMapping("getAllUser/{locationId}")
+    @PreAuthorize("@CheckPermission.hasPermission(authentication)")
     public ResponseEntity getAllUser(@PathVariable Integer locationId) {
         List<Users> userList = userRules.getAllUser(locationId);
         return new ResponseEntity<>(userList, HttpStatus.OK);

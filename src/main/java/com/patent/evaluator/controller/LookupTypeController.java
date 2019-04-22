@@ -30,12 +30,14 @@ public class LookupTypeController {
     private LookupValueRules lookupValueRules;
 
     @PostMapping()
+    @PreAuthorize("@CheckPermission.hasPermission(authentication)")
     public ResponseEntity saveType(@Valid @RequestBody LookupTypeDto lookupTypeDto) {
         lookupTypeRules.save(lookupTypeDto);
         return new ResponseEntity<>(new SuccessResponseDto(SuccessMessages.GENERIC_TYPE_CREATE_TITLE, SuccessMessages.GENERIC_TYPE_CREATE_MESSAGE), HttpStatus.OK);
     }
 
     @PostMapping("value")
+    @PreAuthorize("@CheckPermission.hasPermission(authentication)")
     public ResponseEntity saveValue(@Valid @RequestBody LookupValueDto lookupValueDto) {
         lookupValueRules.save(lookupValueDto);
         return new ResponseEntity<>(new SuccessResponseDto(SuccessMessages.GENERIC_TYPE_VALUE_CREATE_TITLE, SuccessMessages.GENERIC_TYPE_VALUE_CREATE_MESSAGE), HttpStatus.OK);

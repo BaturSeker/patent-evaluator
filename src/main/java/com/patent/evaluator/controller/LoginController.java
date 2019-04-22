@@ -18,6 +18,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.context.request.RequestContextHolder;
@@ -77,6 +78,7 @@ public class LoginController {
 
 
     @GetMapping("getAnonymousUserAuthorities")
+    @PreAuthorize("@CheckPermission.hasPermission(authentication)")
     public ResponseEntity getCustomerUserAuthorities() {
         List<Authority> authorities = this.authorityRules.getAnonymousUserAuthorities();
         List<AuthorityResponse> authorityResponse = getAuthorityResponse(authorities);
@@ -84,6 +86,7 @@ public class LoginController {
     }
 
     @PostMapping(value = "logout")
+    @PreAuthorize("@CheckPermission.hasPermission(authentication)")
     public ResponseEntity logout() {
 
         SecurityContextHolder.getContext().setAuthentication(null);

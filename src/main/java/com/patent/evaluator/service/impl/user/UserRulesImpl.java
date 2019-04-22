@@ -1,5 +1,6 @@
 package com.patent.evaluator.service.impl.user;
 
+import com.patent.evaluator.constant.AuthorityCodes;
 import com.patent.evaluator.constant.ValidationMessages;
 import com.patent.evaluator.domain.Roles;
 import com.patent.evaluator.domain.Users;
@@ -13,6 +14,7 @@ import com.patent.evaluator.util.exception.ValidationException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
@@ -28,6 +30,7 @@ public class UserRulesImpl implements UserRules {
     private UserService userService;
 
     @Override
+    @PreAuthorize("hasAnyAuthority('" + AuthorityCodes.VIEW_USER_MANAGEMENT + "')")
     public void saveAll(List<Users> userList) {
         boolean isValid = true;
         StringBuilder messages = new StringBuilder();
@@ -46,6 +49,7 @@ public class UserRulesImpl implements UserRules {
     }
 
     @Override
+    @PreAuthorize("hasAnyAuthority('" + AuthorityCodes.VIEW_USER_MANAGEMENT + "')")
     public void save(Users user) {
         boolean isValid = true;
         StringBuilder messages = new StringBuilder();
@@ -62,6 +66,7 @@ public class UserRulesImpl implements UserRules {
 
     @Override
     @Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
+    @PreAuthorize("hasAnyAuthority('" + AuthorityCodes.VIEW_USER_MANAGEMENT + "')")
     public Users getUser(Long userId) {
         boolean isValid = true;
         StringBuilder message = new StringBuilder();
@@ -78,40 +83,47 @@ public class UserRulesImpl implements UserRules {
 
     @Override
     @Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
+    @PreAuthorize("hasAnyAuthority('" + AuthorityCodes.VIEW_USER_MANAGEMENT + "')")
     public Page<UserInfoResponseDto> getUsersFiltered(PageableSearchFilterDto filterDto) {
         return userService.getUsersFiltered(filterDto);
     }
 
     @Override
     @Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
+    @PreAuthorize("hasAnyAuthority('" + AuthorityCodes.VIEW_USER_MANAGEMENT + "')")
     public List<Users> read() {
         return userService.getAllUsers();
     }
 
     @Override
     @Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
+    @PreAuthorize("hasAnyAuthority('" + AuthorityCodes.VIEW_USER_MANAGEMENT + "')")
     public List getComboUsers() {
         return userService.getComboUsers();
     }
 
     @Override
     @Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
+    @PreAuthorize("hasAnyAuthority('" + AuthorityCodes.VIEW_USER_MANAGEMENT + "')")
     public Page<UserInfoResponseDto> getUserInfoPage(PageRequest pageRequest) {
         return userService.getUserInfoPage(pageRequest);
     }
 
     @Override
     @Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
+    @PreAuthorize("hasAnyAuthority('" + AuthorityCodes.VIEW_USER_MANAGEMENT + "')")
     public List<Users> findByRole(Roles role) {
         return this.userService.findByRole(role);
     }
 
     @Override
+    @PreAuthorize("hasAnyAuthority('" + AuthorityCodes.VIEW_USER_MANAGEMENT + "')")
     public String resetPassword(ResetPasswordDto resetPasswordDto) throws NoSuchAlgorithmException {
         return this.userService.resetPassword(resetPasswordDto);
     }
 
     @Override
+    @PreAuthorize("hasAnyAuthority('" + AuthorityCodes.VIEW_USER_MANAGEMENT + "')")
     @Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
     public List<Users> getAllUser(Integer locationId) {
         return this.userService.getAllUser(locationId);

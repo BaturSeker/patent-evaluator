@@ -1,6 +1,7 @@
 package com.patent.evaluator.service.impl.authority;
 
 
+import com.patent.evaluator.constant.AuthorityCodes;
 import com.patent.evaluator.constant.ExceptionMessages;
 import com.patent.evaluator.dao.AuthorityRepository;
 import com.patent.evaluator.dao.RoleAuthorityRepository;
@@ -25,6 +26,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.jpa.domain.Specification;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Service;
 
 import java.util.*;
@@ -39,6 +41,7 @@ public class AuthorityServiceImpl implements AuthorityService {
     private static final Logger LOGGER = LoggerFactory.getLogger(AuthorityServiceImpl.class);
 
     @Override
+    @PreAuthorize("hasAnyAuthority('" + AuthorityCodes.UPDATE_AUTHORITY + "')")
     public void save(AuthorityRequestDto authorityRequestDto) {
         Authority authority = new Authority();
         authority.setParentAuthority(authorityRepository.getOne(authorityRequestDto.getParentId()));
@@ -53,6 +56,7 @@ public class AuthorityServiceImpl implements AuthorityService {
     }
 
     @Override
+    @PreAuthorize("hasAnyAuthority('" + AuthorityCodes.UPDATE_AUTHORITY + "')")
     public void update(Long authorityId, AuthorityRequestDto authorityRequestDto) {
         Authority authority = authorityRepository.getOne(authorityId);
 
@@ -73,6 +77,7 @@ public class AuthorityServiceImpl implements AuthorityService {
     }
 
     @Override
+    @PreAuthorize("hasAnyAuthority('" + AuthorityCodes.VIEW_AUTHORITY_MANAGEMENT + "')")
     public Authority getAuthority(Long authorityId) {
         Authority role = authorityRepository.getOne(authorityId);
 
@@ -83,11 +88,13 @@ public class AuthorityServiceImpl implements AuthorityService {
     }
 
     @Override
+    @PreAuthorize("hasAnyAuthority('" + AuthorityCodes.VIEW_AUTHORITY_MANAGEMENT + "')")
     public List<Authority> readAll() {
         return authorityRepository.findByParentAuthorityOrderById(null);
     }
 
     @Override
+    @PreAuthorize("hasAnyAuthority('" + AuthorityCodes.UPDATE_ROLE_AUTHORITIES + "')")
     public void assignRoleAuthorities(RoleAuthorityRequestDto roleAuthorityRequestDto) {
         Roles role = roleRepository.getOne(roleAuthorityRequestDto.getRoleId());
         roleAuthorityRepository.deleteAllByRole(role);
@@ -100,6 +107,7 @@ public class AuthorityServiceImpl implements AuthorityService {
     }
 
     @Override
+    @PreAuthorize("hasAnyAuthority('" + AuthorityCodes.VIEW_AUTHORITY_MANAGEMENT + "')")
     public List<Authority> getUserAuthorities(Users users) {
         Collection<UserRole> userRolesByUsersId = users.getUserRoles();
         List<Long> roleIds = new ArrayList<>();
@@ -191,8 +199,8 @@ public class AuthorityServiceImpl implements AuthorityService {
 
         List<Authority> allAuthority = this.authorityRepository.findByParentAuthorityOrderById(null);
         List<Authority> authorities = getAuthorities(allAuthority, authorityIds);
-//        return AuthorityMapper.INSTANCE.entityListToDtoList(authorities);
-        return new ArrayList<>();
+
+        return AuthorityMapper.INSTANCE.entityListToDtoList(authorities);
     }
 
     private List<Authority> getAuthorities(List<Authority> authorityListByDb, Set<Long> authorityIds) {
