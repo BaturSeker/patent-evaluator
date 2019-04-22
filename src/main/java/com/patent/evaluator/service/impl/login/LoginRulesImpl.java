@@ -3,7 +3,7 @@ package com.patent.evaluator.service.impl.login;
 
 import com.patent.evaluator.constant.ValidationMessages;
 import com.patent.evaluator.domain.Users;
-import com.patent.evaluator.dto.LoginRequest;
+import com.patent.evaluator.dto.LoginRequestDto;
 import com.patent.evaluator.service.api.login.LoginRules;
 import com.patent.evaluator.service.api.login.LoginService;
 import com.patent.evaluator.service.api.password.PasswordRules;
@@ -25,16 +25,16 @@ public class LoginRulesImpl implements LoginRules {
     }
 
     @Override
-    public Users login(LoginRequest loginRequest) throws Exception {
+    public Users login(LoginRequestDto loginRequestDto) throws Exception {
 
         StringBuilder message = new StringBuilder();
         boolean isValid = true;
-        if (!ValidationHelper.notEmpty(loginRequest.getPassword())) {
+        if (!ValidationHelper.notEmpty(loginRequestDto.getPassword())) {
             isValid = false;
             message.append(ValidationMessages.LOGIN_PASSWORD_NOT_NULL);
             message.append(System.lineSeparator());
         }
-        if (!ValidationHelper.notEmpty(loginRequest.getUsername())) {
+        if (!ValidationHelper.notEmpty(loginRequestDto.getUsername())) {
             isValid = false;
             message.append(ValidationMessages.LOGIN_USER_NAME_NOT_NULL);
             message.append(System.lineSeparator());
@@ -42,21 +42,21 @@ public class LoginRulesImpl implements LoginRules {
         if (!isValid) {
             throw new ValidationException(message.toString());
         }
-        return loginService.loggedIn(loginRequest);
+        return loginService.loggedIn(loginRequestDto);
     }
 
 
     @Override
-    public Users loginLDAP(LoginRequest loginRequest) throws Exception {
+    public Users loginLDAP(LoginRequestDto loginRequestDto) throws Exception {
 
         StringBuilder message = new StringBuilder();
         boolean isValid = true;
-        if (!ValidationHelper.notEmpty(loginRequest.getPassword())) {
+        if (!ValidationHelper.notEmpty(loginRequestDto.getPassword())) {
             isValid = false;
             message.append(ValidationMessages.LOGIN_PASSWORD_NOT_NULL);
             message.append(System.lineSeparator());
         }
-        if (!ValidationHelper.notEmpty(loginRequest.getUsername())) {
+        if (!ValidationHelper.notEmpty(loginRequestDto.getUsername())) {
             isValid = false;
             message.append(ValidationMessages.LOGIN_USER_NAME_NOT_NULL);
             message.append(System.lineSeparator());
@@ -64,7 +64,7 @@ public class LoginRulesImpl implements LoginRules {
         if (!isValid) {
             throw new ValidationException(message.toString());
         }
-        return loginService.loggedInLDAP(loginRequest);
+        return loginService.loggedInLDAP(loginRequestDto);
     }
 }
 

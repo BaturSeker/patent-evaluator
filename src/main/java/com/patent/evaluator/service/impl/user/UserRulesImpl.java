@@ -4,7 +4,7 @@ import com.patent.evaluator.constant.ValidationMessages;
 import com.patent.evaluator.domain.Roles;
 import com.patent.evaluator.domain.Users;
 import com.patent.evaluator.dto.ResetPasswordDto;
-import com.patent.evaluator.dto.UserInfoResponse;
+import com.patent.evaluator.dto.UserInfoResponseDto;
 import com.patent.evaluator.pageablesearch.model.PageableSearchFilterDto;
 import com.patent.evaluator.service.api.user.UserRules;
 import com.patent.evaluator.service.api.user.UserService;
@@ -73,7 +73,7 @@ public class UserRulesImpl implements UserRules {
     }
 
     @Override
-    public Page<UserInfoResponse> getUsersFiltered(PageableSearchFilterDto filterDto) {
+    public Page<UserInfoResponseDto> getUsersFiltered(PageableSearchFilterDto filterDto) {
         return userService.getUsersFiltered(filterDto);
     }
 
@@ -88,7 +88,7 @@ public class UserRulesImpl implements UserRules {
     }
 
     @Override
-    public Page<UserInfoResponse> getUserInfoPage(PageRequest pageRequest) {
+    public Page<UserInfoResponseDto> getUserInfoPage(PageRequest pageRequest) {
         return userService.getUserInfoPage(pageRequest);
     }
 

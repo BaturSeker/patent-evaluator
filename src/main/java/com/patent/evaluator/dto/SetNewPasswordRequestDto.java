@@ -1,6 +1,6 @@
 package com.patent.evaluator.dto;
 
-public class SetNewPasswordRequest {
+public class SetNewPasswordRequestDto {
     private Long userId;
     private String oldPassword;
     private String newPassword;

@@ -1,6 +1,6 @@
 package com.patent.evaluator.dto;
 
-public class LoginUserResponse {
+public class LoginUserResponseDto {
 
     private Long userId;
     private String name;

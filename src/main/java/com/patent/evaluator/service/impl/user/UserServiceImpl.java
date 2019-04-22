@@ -6,7 +6,7 @@ import com.patent.evaluator.domain.Roles;
 import com.patent.evaluator.domain.UserRole;
 import com.patent.evaluator.domain.Users;
 import com.patent.evaluator.dto.ResetPasswordDto;
-import com.patent.evaluator.dto.UserInfoResponse;
+import com.patent.evaluator.dto.UserInfoResponseDto;
 import com.patent.evaluator.pageablesearch.model.PageableSearchFilterDto;
 import com.patent.evaluator.service.api.user.UserService;
 import com.patent.evaluator.util.ComboResponseBuilder;
@@ -57,26 +57,26 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public Page<UserInfoResponse> getUserInfoPage(PageRequest pageRequest) {
+    public Page<UserInfoResponseDto> getUserInfoPage(PageRequest pageRequest) {
         Page<Users> usersPageResult = usersRepository.findUsersBy(pageRequest);
-        List<UserInfoResponse> userInfoResponseList = new ArrayList<>();
+        List<UserInfoResponseDto> userInfoResponseDtoList = new ArrayList<>();
         //TODO: deleted userlar sayilmamalidir
-        buildResultList(usersPageResult, userInfoResponseList);
+        buildResultList(usersPageResult, userInfoResponseDtoList);
 
         long totalUserCount = usersPageResult.getTotalElements();
-        return new PageImpl(userInfoResponseList, pageRequest, totalUserCount);
+        return new PageImpl(userInfoResponseDtoList, pageRequest, totalUserCount);
     }
 
     @Override
-    public Page<UserInfoResponse> getUsersFiltered(PageableSearchFilterDto filterDto) {
+    public Page<UserInfoResponseDto> getUsersFiltered(PageableSearchFilterDto filterDto) {
         //TODO: yazılacak
         return null;
     }
 
-    private void buildResultList(Page<Users> usersPageResult, List<UserInfoResponse> userInfoResponseList) {
+    private void buildResultList(Page<Users> usersPageResult, List<UserInfoResponseDto> userInfoResponseDtoList) {
         for (Users u : usersPageResult) {
-            UserInfoResponse userInfoResponse = new UserInfoResponse();
-            populateFromUser(u, userInfoResponse);
+            UserInfoResponseDto userInfoResponseDto = new UserInfoResponseDto();
+            populateFromUser(u, userInfoResponseDto);
 
 
             List<UserRole> userRoles = userRoleRepository.findByUser(u);
@@ -84,8 +84,8 @@ public class UserServiceImpl implements UserService {
             for (UserRole userRole : userRoles) {
                 roleIdList.add(userRole.getRole().getId());
             }
-            userInfoResponse.setRoleIds(roleIdList);
-            userInfoResponseList.add(userInfoResponse);
+            userInfoResponseDto.setRoleIds(roleIdList);
+            userInfoResponseDtoList.add(userInfoResponseDto);
         }
     }
 
@@ -157,13 +157,13 @@ public class UserServiceImpl implements UserService {
 //        mailService.sendEmail(mail);
     }
 
-    private void populateFromUser(Users u, UserInfoResponse userInfoResponse) {
-        userInfoResponse.setName(u.getFirstname());
-        userInfoResponse.setSurname(u.getSurname());
-        userInfoResponse.setEmail(u.getEmail());
-        userInfoResponse.setMobile(u.getMobilePhone());
-        userInfoResponse.setTelephone(u.getTelephone());
-        userInfoResponse.setActive(u.getActive());
+    private void populateFromUser(Users u, UserInfoResponseDto userInfoResponseDto) {
+        userInfoResponseDto.setName(u.getFirstname());
+        userInfoResponseDto.setSurname(u.getSurname());
+        userInfoResponseDto.setEmail(u.getEmail());
+        userInfoResponseDto.setMobile(u.getMobilePhone());
+        userInfoResponseDto.setTelephone(u.getTelephone());
+        userInfoResponseDto.setActive(u.getActive());
     }
 
     @Autowired

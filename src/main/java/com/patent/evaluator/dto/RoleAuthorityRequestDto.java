@@ -2,7 +2,7 @@ package com.patent.evaluator.dto;
 
 import java.util.List;
 
-public class RoleAuthorityRequest {
+public class RoleAuthorityRequestDto {
     private Long roleId;
     private List<Long> authorityIds;
 

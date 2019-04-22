@@ -2,23 +2,23 @@ package com.patent.evaluator.pageablesearch.model;
 
 import org.springframework.data.domain.Sort;
 
-public class BaseSortRequest {
+public class BaseSortRequestDto {
     private String dir;
     private String field;
     private Sort.NullHandling nullHandling;
 
-    public BaseSortRequest(String dir, String field) {
+    public BaseSortRequestDto(String dir, String field) {
         this.dir = dir;
         this.field = field;
     }
 
-    public BaseSortRequest(String dir, String field, Sort.NullHandling nullHandling) {
+    public BaseSortRequestDto(String dir, String field, Sort.NullHandling nullHandling) {
         this.dir = dir;
         this.field = field;
         this.nullHandling = nullHandling;
     }
 
-    public BaseSortRequest() {
+    public BaseSortRequestDto() {
     }
 
     public Sort.NullHandling getNullHandling() {

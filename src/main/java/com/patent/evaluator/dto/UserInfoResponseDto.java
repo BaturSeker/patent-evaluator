@@ -2,7 +2,7 @@ package com.patent.evaluator.dto;
 
 import java.util.List;
 
-public class UserInfoResponse {
+public class UserInfoResponseDto {
     private Long usersId;
     private String sicilNo;
     private String name;

@@ -3,7 +3,7 @@ package com.patent.evaluator.service.api.user;
 import com.patent.evaluator.domain.Roles;
 import com.patent.evaluator.domain.Users;
 import com.patent.evaluator.dto.ResetPasswordDto;
-import com.patent.evaluator.dto.UserInfoResponse;
+import com.patent.evaluator.dto.UserInfoResponseDto;
 import com.patent.evaluator.pageablesearch.model.PageableSearchFilterDto;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -20,9 +20,9 @@ public interface UserService {
 
     List getComboUsers();
 
-    Page<UserInfoResponse> getUserInfoPage(PageRequest pageRequest);
+    Page<UserInfoResponseDto> getUserInfoPage(PageRequest pageRequest);
 
-    Page<UserInfoResponse> getUsersFiltered(PageableSearchFilterDto filterDto);
+    Page<UserInfoResponseDto> getUsersFiltered(PageableSearchFilterDto filterDto);
 
     List<Users> findByRole(Roles role);
 

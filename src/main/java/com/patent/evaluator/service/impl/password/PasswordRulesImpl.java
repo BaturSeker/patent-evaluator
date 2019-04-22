@@ -2,8 +2,8 @@ package com.patent.evaluator.service.impl.password;
 
 import com.patent.evaluator.constant.ExceptionMessages;
 import com.patent.evaluator.domain.Users;
-import com.patent.evaluator.dto.SetNewPasswordRequest;
-import com.patent.evaluator.dto.UserRequest;
+import com.patent.evaluator.dto.SetNewPasswordRequestDto;
+import com.patent.evaluator.dto.UserRequestDto;
 import com.patent.evaluator.service.api.password.PasswordRules;
 import com.patent.evaluator.service.api.user.UserRules;
 import com.patent.evaluator.service.api.user.UserService;
@@ -35,16 +35,16 @@ public class PasswordRulesImpl implements PasswordRules {
     private ResourceLoader resourceLoader;
 
     @Override
-    public void passwordValidation(UserRequest userRequest) throws ValidationException {
+    public void passwordValidation(UserRequestDto userRequestDto) throws ValidationException {
         boolean isValidPass = true;
         StringBuilder messages = new StringBuilder();
 
-        basePasswordRules(userRequest.getPassword());
+        basePasswordRules(userRequestDto.getPassword());
 
-        checkSlangWord(userRequest.getPassword());
+        checkSlangWord(userRequestDto.getPassword());
 
-        if (userRequest.getPassword().contains(userRequest.getName()) || userRequest.getPassword().contains(userRequest.getSurname())
-                || userRequest.getPassword().contains(userRequest.getUserName())) {
+        if (userRequestDto.getPassword().contains(userRequestDto.getName()) || userRequestDto.getPassword().contains(userRequestDto.getSurname())
+                || userRequestDto.getPassword().contains(userRequestDto.getUserName())) {
             messages.append(ExceptionMessages.CONSTRAINT_PERSONAL_INFO);
             messages.append(System.lineSeparator());
             isValidPass = false;
@@ -103,14 +103,14 @@ public class PasswordRulesImpl implements PasswordRules {
     }
 
     @Override
-    public void setNewPassword(SetNewPasswordRequest setNewPasswordRequest) throws NoSuchAlgorithmException {
+    public void setNewPassword(SetNewPasswordRequestDto setNewPasswordRequestDto) throws NoSuchAlgorithmException {
         StringBuilder messages = new StringBuilder();
         boolean isValidPass = true;
         String hashedOldPass, hashedNewPass;
-        Users user = userService.getUser(setNewPasswordRequest.getUserId());
-        hashedOldPass = HashUtils.sha256(setNewPasswordRequest.getOldPassword());
-        hashedNewPass = HashUtils.sha256(setNewPasswordRequest.getNewPassword());
-        if (!setNewPasswordRequest.getNewPassword().equals(setNewPasswordRequest.getNewPasswordRe())) {
+        Users user = userService.getUser(setNewPasswordRequestDto.getUserId());
+        hashedOldPass = HashUtils.sha256(setNewPasswordRequestDto.getOldPassword());
+        hashedNewPass = HashUtils.sha256(setNewPasswordRequestDto.getNewPassword());
+        if (!setNewPasswordRequestDto.getNewPassword().equals(setNewPasswordRequestDto.getNewPasswordRe())) {
             isValidPass = false;
             messages.append(ExceptionMessages.PASSWORDS_NOT_MATCH);
             messages.append(System.lineSeparator());
@@ -129,14 +129,14 @@ public class PasswordRulesImpl implements PasswordRules {
             throw new ValidationException(messages.toString());
         }
 
-        UserRequest userRequest = new UserRequest();
-        userRequest.setName(user.getFirstname());
-        userRequest.setSurname(user.getSurname());
-        userRequest.setUserName(user.getUsername());
-        userRequest.setPassword(setNewPasswordRequest.getNewPassword());
-        passwordValidation(userRequest);
+        UserRequestDto userRequestDto = new UserRequestDto();
+        userRequestDto.setName(user.getFirstname());
+        userRequestDto.setSurname(user.getSurname());
+        userRequestDto.setUserName(user.getUsername());
+        userRequestDto.setPassword(setNewPasswordRequestDto.getNewPassword());
+        passwordValidation(userRequestDto);
 
-        String hashedPassword = HashUtils.sha256(setNewPasswordRequest.getNewPassword());
+        String hashedPassword = HashUtils.sha256(setNewPasswordRequestDto.getNewPassword());
         user.setPassword(hashedPassword);
         user.setPasswordCreatedDate(CalendarHelper.getCurrentInstant());
         user.setPasswordTemporary(false);

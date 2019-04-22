@@ -40,23 +40,23 @@ public class AuthorityController {
 
     @PutMapping(value = "{authorityId}")
     @PreAuthorize("@CheckPermission.hasPermission(authentication)")
-    public ResponseEntity updateAuthority(@PathVariable Long authorityId, @Valid @RequestBody AuthorityRequest authorityRequest) {
+    public ResponseEntity updateAuthority(@PathVariable Long authorityId, @Valid @RequestBody AuthorityRequestDto authorityRequestDto) {
 
-        authorityRules.update(authorityId, authorityRequest);
+        authorityRules.update(authorityId, authorityRequestDto);
         return new ResponseEntity<>(new SuccessResponseDto(SuccessMessages.AUTHORITY_UPDATE_TITLE, SuccessMessages.AUTHORITY_UPDATE_MESSAGE), HttpStatus.OK);
     }
 
     @PostMapping(value = "save")
     @PreAuthorize("@CheckPermission.hasPermission(authentication)")
-    public ResponseEntity saveAuthority(@Valid @RequestBody AuthorityRequest authorityRequest) {
-        authorityRules.save(authorityRequest);
+    public ResponseEntity saveAuthority(@Valid @RequestBody AuthorityRequestDto authorityRequestDto) {
+        authorityRules.save(authorityRequestDto);
         return new ResponseEntity<>(new SuccessResponseDto(SuccessMessages.AUTHORITY_CREATE_TITLE, SuccessMessages.AUTHORITY_CREATE_MESSAGE), HttpStatus.OK);
     }
 
     @PostMapping(value = "assignRoleAuthorities")
     @PreAuthorize("@CheckPermission.hasPermission(authentication)")
-    public ResponseEntity assignRoleAuthorities(@Valid @RequestBody RoleAuthorityRequest roleAuthorityRequest) {
-        authorityRules.assignRoleAuthorities(roleAuthorityRequest);
+    public ResponseEntity assignRoleAuthorities(@Valid @RequestBody RoleAuthorityRequestDto roleAuthorityRequestDto) {
+        authorityRules.assignRoleAuthorities(roleAuthorityRequestDto);
         return new ResponseEntity<>(new SuccessResponseDto(SuccessMessages.AUTHORITY_ASSIGN_TITLE, SuccessMessages.AUTHORITY_ASSIGN_MESSAGE), HttpStatus.OK);
     }
 

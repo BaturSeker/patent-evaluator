@@ -7,10 +7,10 @@ import com.patent.evaluator.dao.RoleAuthorityRepository;
 import com.patent.evaluator.dao.RoleRepository;
 import com.patent.evaluator.domain.*;
 import com.patent.evaluator.dto.AuthorityPageDto;
-import com.patent.evaluator.dto.AuthorityRequest;
+import com.patent.evaluator.dto.AuthorityRequestDto;
 import com.patent.evaluator.dto.AuthorityResponse;
-import com.patent.evaluator.dto.RoleAuthorityRequest;
-import com.patent.evaluator.pageablesearch.model.BaseSortRequest;
+import com.patent.evaluator.dto.RoleAuthorityRequestDto;
+import com.patent.evaluator.pageablesearch.model.BaseSortRequestDto;
 import com.patent.evaluator.pageablesearch.model.PageRequestDto;
 import com.patent.evaluator.pageablesearch.model.PageableSearchFilterDto;
 import com.patent.evaluator.pageablesearch.specification.SearchSpecificationBuilder;
@@ -39,29 +39,29 @@ public class AuthorityServiceImpl implements AuthorityService {
     private static final Logger LOGGER = LoggerFactory.getLogger(AuthorityServiceImpl.class);
 
     @Override
-    public void save(AuthorityRequest authorityRequest) {
+    public void save(AuthorityRequestDto authorityRequestDto) {
         Authority authority = new Authority();
-        authority.setParentAuthority(authorityRepository.getOne(authorityRequest.getParentId()));
+        authority.setParentAuthority(authorityRepository.getOne(authorityRequestDto.getParentId()));
         authority.setCreatedDate(CalendarHelper.getCurrentInstant());
-        authority.setMenu(authorityRequest.getMenu());
-        authority.setAuthorityCode(authorityRequest.getAuthorizeCode());
-        authority.setTitle(authorityRequest.getTitle());
-        authority.setUrl(authorityRequest.getUrl());
-        authority.setVisible(authorityRequest.getVisible());
-        authority.setIcon(authorityRequest.getIcon());
+        authority.setMenu(authorityRequestDto.getMenu());
+        authority.setAuthorityCode(authorityRequestDto.getAuthorizeCode());
+        authority.setTitle(authorityRequestDto.getTitle());
+        authority.setUrl(authorityRequestDto.getUrl());
+        authority.setVisible(authorityRequestDto.getVisible());
+        authority.setIcon(authorityRequestDto.getIcon());
         authorityRepository.save(authority);
     }
 
     @Override
-    public void update(Long authorityId, AuthorityRequest authorityRequest) {
+    public void update(Long authorityId, AuthorityRequestDto authorityRequestDto) {
         Authority authority = authorityRepository.getOne(authorityId);
 
         if (Objects.equals(authority, null)) {
             throw new NullObjectException(ExceptionMessages.AUTHORITY_NULL);
         }
         //this.cancelRoleAuthorityRelation(authorityId);
-        authority.setTitle(authorityRequest.getTitle());
-        authority.setIcon(authorityRequest.getIcon());
+        authority.setTitle(authorityRequestDto.getTitle());
+        authority.setIcon(authorityRequestDto.getIcon());
         authorityRepository.save(authority);
     }
 
@@ -88,10 +88,10 @@ public class AuthorityServiceImpl implements AuthorityService {
     }
 
     @Override
-    public void assignRoleAuthorities(RoleAuthorityRequest roleAuthorityRequest) {
-        Roles role = roleRepository.getOne(roleAuthorityRequest.getRoleId());
+    public void assignRoleAuthorities(RoleAuthorityRequestDto roleAuthorityRequestDto) {
+        Roles role = roleRepository.getOne(roleAuthorityRequestDto.getRoleId());
         roleAuthorityRepository.deleteAllByRole(role);
-        for (Long authorityId : roleAuthorityRequest.getAuthorityIds()) {
+        for (Long authorityId : roleAuthorityRequestDto.getAuthorityIds()) {
             RoleAuthority roleAuthority = new RoleAuthority();
             roleAuthority.setRole(role);
             roleAuthority.setAuthority(authorityRepository.getOne(authorityId));
@@ -160,7 +160,7 @@ public class AuthorityServiceImpl implements AuthorityService {
     }
 
     private void addSortRequestForCreatedOnDesc(PageRequestDto pageRequest) {
-        BaseSortRequest sortRequest = new BaseSortRequest();
+        BaseSortRequestDto sortRequest = new BaseSortRequestDto();
         sortRequest.setDir("desc");
         sortRequest.setField("updateOn");
         pageRequest.addSort(sortRequest);

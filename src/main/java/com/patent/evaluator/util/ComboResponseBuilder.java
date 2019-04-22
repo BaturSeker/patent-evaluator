@@ -1,6 +1,6 @@
 package com.patent.evaluator.util;
 
-import com.patent.evaluator.dto.combo.ComboResponse;
+import com.patent.evaluator.dto.combo.ComboResponseDto;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -10,42 +10,42 @@ public final class ComboResponseBuilder {
     private ComboResponseBuilder() {
     }
 
-    public static List<ComboResponse> buildComboResponseList(List<Object[]> resultList) {
-        List<ComboResponse> comboResultList = new ArrayList<>();
+    public static List<ComboResponseDto> buildComboResponseList(List<Object[]> resultList) {
+        List<ComboResponseDto> comboResultList = new ArrayList<>();
 
         for (Object[] resultItem : resultList) {
-            ComboResponse comboResponse = new ComboResponse();
-            comboResponse.setValue(String.valueOf(resultItem[0]));
-            comboResponse.setText(String.valueOf(resultItem[1]));
-            comboResultList.add(comboResponse);
+            ComboResponseDto comboResponseDto = new ComboResponseDto();
+            comboResponseDto.setValue(String.valueOf(resultItem[0]));
+            comboResponseDto.setText(String.valueOf(resultItem[1]));
+            comboResultList.add(comboResponseDto);
         }
 
         return comboResultList;
     }
 
-    public static List<ComboResponse> buildUniqueItemedComboResponseList(List<Object[]> resultList) {
-        List<ComboResponse> comboResultList = new ArrayList<>();
+    public static List<ComboResponseDto> buildUniqueItemedComboResponseList(List<Object[]> resultList) {
+        List<ComboResponseDto> comboResultList = new ArrayList<>();
 
         for (Object[] resultItem : resultList) {
-            ComboResponse comboResponse = new ComboResponse();
-            comboResponse.setValue(String.valueOf(resultItem[0]));
-            comboResponse.setText(String.valueOf(resultItem[1]));
-            if (!comboResultList.contains(comboResponse)) {
-                comboResultList.add(comboResponse);
+            ComboResponseDto comboResponseDto = new ComboResponseDto();
+            comboResponseDto.setValue(String.valueOf(resultItem[0]));
+            comboResponseDto.setText(String.valueOf(resultItem[1]));
+            if (!comboResultList.contains(comboResponseDto)) {
+                comboResultList.add(comboResponseDto);
             }
         }
 
         return comboResultList;
     }
 
-    public static List<ComboResponse> buildEnumComboResponseList(Enum[] resultList) {
-        List<ComboResponse> comboResultList = new ArrayList<>();
+    public static List<ComboResponseDto> buildEnumComboResponseList(Enum[] resultList) {
+        List<ComboResponseDto> comboResultList = new ArrayList<>();
 
         for (Enum resultItem : resultList) {
-            ComboResponse comboResponse = new ComboResponse();
-            comboResponse.setValue(String.valueOf(resultItem.ordinal() + 1));
-            comboResponse.setText(String.valueOf(resultItem.toString()));
-            comboResultList.add(comboResponse);
+            ComboResponseDto comboResponseDto = new ComboResponseDto();
+            comboResponseDto.setValue(String.valueOf(resultItem.ordinal() + 1));
+            comboResponseDto.setText(String.valueOf(resultItem.toString()));
+            comboResultList.add(comboResponseDto);
         }
 
         return comboResultList;

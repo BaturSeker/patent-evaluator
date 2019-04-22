@@ -1,6 +1,6 @@
 package com.patent.evaluator.dto;
 
-public class UserRequest {
+public class UserRequestDto {
     private Integer userId;
     private String name;
     private String surname;

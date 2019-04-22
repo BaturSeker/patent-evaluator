@@ -10,7 +10,7 @@ public class PageRequestDto {
 
     private int page = 0;
     private int size = Integer.MAX_VALUE;
-    private List<BaseSortRequest> sort;
+    private List<BaseSortRequestDto> sort;
 
     public int getPage() {
         return page;
@@ -28,20 +28,20 @@ public class PageRequestDto {
         this.size = size;
     }
 
-    public List<BaseSortRequest> getSort() {
+    public List<BaseSortRequestDto> getSort() {
         return sort;
     }
 
-    public void setSort(List<BaseSortRequest> sort) {
+    public void setSort(List<BaseSortRequestDto> sort) {
         this.sort = sort;
     }
 
-    public void addSort(BaseSortRequest baseSortRequest) {
+    public void addSort(BaseSortRequestDto baseSortRequestDto) {
         if (this.getSort() == null) {
-            this.setSort(new ArrayList<BaseSortRequest>());
+            this.setSort(new ArrayList<BaseSortRequestDto>());
         }
 
-        this.sort.add(baseSortRequest);
+        this.sort.add(baseSortRequestDto);
     }
 
     private Sort getSortProperties() {
@@ -53,7 +53,7 @@ public class PageRequestDto {
 
             if (this.getSort().size() > 1) {
                 for (int i = 1; i < this.getSort().size(); i++) {
-                    BaseSortRequest newSort = this.getSort().get(i);
+                    BaseSortRequestDto newSort = this.getSort().get(i);
                     Sort.Order newOrder = new Sort.Order(Sort.Direction.fromString(newSort.getDir()), newSort.getField());
                     newOrder = applyNullHandling(newOrder, newSort.getNullHandling());
 

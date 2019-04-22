@@ -5,7 +5,7 @@ import com.patent.evaluator.constant.Constants;
 import com.patent.evaluator.constant.ExceptionMessages;
 import com.patent.evaluator.dao.UsersRepository;
 import com.patent.evaluator.domain.Users;
-import com.patent.evaluator.dto.LoginRequest;
+import com.patent.evaluator.dto.LoginRequestDto;
 import com.patent.evaluator.service.api.login.LoginService;
 import com.patent.evaluator.util.CalendarHelper;
 import com.patent.evaluator.util.HashUtils;
@@ -26,8 +26,8 @@ public class LoginServiceImpl implements LoginService {
     private HttpServletRequest httpServletRequest;
 
     @Override
-    public Users loggedIn(LoginRequest loginRequest) throws Exception {
-        Users user = usersRepository.findUsersByUsername(loginRequest.getUsername());
+    public Users loggedIn(LoginRequestDto loginRequestDto) throws Exception {
+        Users user = usersRepository.findUsersByUsername(loginRequestDto.getUsername());
         if (user == null) {
             throw new ValidationException(ExceptionMessages.NO_SUCH_USER);
         }
@@ -35,7 +35,7 @@ public class LoginServiceImpl implements LoginService {
             throw new ValidationException(ExceptionMessages.USER_NOT_ACTIVE);
         }
 
-        if (!(user.getPassword().equalsIgnoreCase(HashUtils.sha256(loginRequest.getPassword())))) {
+        if (!(user.getPassword().equalsIgnoreCase(HashUtils.sha256(loginRequestDto.getPassword())))) {
             user.setInvalidPswEntryCount(user.getInvalidPswEntryCount() + 1);
             if (user.getInvalidPswEntryCount() >= Constants.INV_PASSWORD_COUNT && user.getLoginLockDate() == null) {
                 user.setLoginLockDate(CalendarHelper.getCurrentInstant());
@@ -51,8 +51,8 @@ public class LoginServiceImpl implements LoginService {
     }
 
     @Override
-    public Users loggedInLDAP(LoginRequest loginRequest) throws Exception {
-        Users user = usersRepository.findUsersByUsername(loginRequest.getUsername());
+    public Users loggedInLDAP(LoginRequestDto loginRequestDto) throws Exception {
+        Users user = usersRepository.findUsersByUsername(loginRequestDto.getUsername());
         if (user == null) {
             throw new ValidationException(ExceptionMessages.NO_SUCH_USER);
         }
@@ -61,7 +61,7 @@ public class LoginServiceImpl implements LoginService {
             throw new ValidationException(ExceptionMessages.USER_NOT_ACTIVE);
         }
 
-        user.setPassword(HashUtils.sha256(loginRequest.getPassword()));
+        user.setPassword(HashUtils.sha256(loginRequestDto.getPassword()));
         user.setInvalidPswEntryCount(0);
         user.setLoginLockDate(null);
 

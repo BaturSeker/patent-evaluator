@@ -2,8 +2,8 @@ package com.patent.evaluator.dto;
 
 import java.util.List;
 
-public class LoginResponse {
-    private LoginUserResponse loginUserResponse;
+public class LoginResponseDto {
+    private LoginUserResponseDto loginUserResponseDto;
     private List<AuthorityResponse> authorityResponse;
     private String token;
 
@@ -23,11 +23,11 @@ public class LoginResponse {
         this.authorityResponse = authorityResponse;
     }
 
-    public LoginUserResponse getLoginUserResponse() {
-        return loginUserResponse;
+    public LoginUserResponseDto getLoginUserResponseDto() {
+        return loginUserResponseDto;
     }
 
-    public void setLoginUserResponse(LoginUserResponse loginUserResponse) {
-        this.loginUserResponse = loginUserResponse;
+    public void setLoginUserResponseDto(LoginUserResponseDto loginUserResponseDto) {
+        this.loginUserResponseDto = loginUserResponseDto;
     }
 }

@@ -4,9 +4,9 @@ package com.patent.evaluator.service.impl.authority;
 import com.patent.evaluator.constant.ValidationMessages;
 import com.patent.evaluator.domain.Authority;
 import com.patent.evaluator.domain.Users;
-import com.patent.evaluator.dto.AuthorityRequest;
+import com.patent.evaluator.dto.AuthorityRequestDto;
 import com.patent.evaluator.dto.AuthorityResponse;
-import com.patent.evaluator.dto.RoleAuthorityRequest;
+import com.patent.evaluator.dto.RoleAuthorityRequestDto;
 import com.patent.evaluator.service.api.authority.AuthorityRules;
 import com.patent.evaluator.service.api.authority.AuthorityService;
 import com.patent.evaluator.util.ValidationHelper;
@@ -24,35 +24,35 @@ public class AuthorityRulesImpl implements AuthorityRules {
     private AuthorityService authorityService;
 
     @Override
-    public void save(AuthorityRequest authorityRequest) {
+    public void save(AuthorityRequestDto authorityRequestDto) {
         StringBuilder messages = new StringBuilder();
         boolean isValid = true;
-        if (!Objects.nonNull(authorityRequest.getTitle())) {
+        if (!Objects.nonNull(authorityRequestDto.getTitle())) {
             isValid = false;
             messages.append(ValidationMessages.AUTHORITY_TITLE_NOT_NULL);
             messages.append(System.lineSeparator());
         }
-        if (!Objects.nonNull(authorityRequest.getIcon())) {
+        if (!Objects.nonNull(authorityRequestDto.getIcon())) {
             isValid = false;
             messages.append(ValidationMessages.AUTHORITY_ICON_NOT_NULL);
             messages.append(System.lineSeparator());
         }
-        if (!Objects.nonNull(authorityRequest.getUrl())) {
+        if (!Objects.nonNull(authorityRequestDto.getUrl())) {
             isValid = false;
             messages.append(ValidationMessages.AUTHORITY_URL_NOT_NULL);
             messages.append(System.lineSeparator());
         }
-        if (!Objects.nonNull(authorityRequest.getAuthorizeCode())) {
+        if (!Objects.nonNull(authorityRequestDto.getAuthorizeCode())) {
             isValid = false;
             messages.append(ValidationMessages.AUTHORITY_AUTHORIZE_CODE_NOT_NULL);
             messages.append(System.lineSeparator());
         }
-        if (!Objects.nonNull(authorityRequest.getMenu())) {
+        if (!Objects.nonNull(authorityRequestDto.getMenu())) {
             isValid = false;
             messages.append(ValidationMessages.AUTHORITY_IS_MENU_NOT_NULL);
             messages.append(System.lineSeparator());
         }
-        if (!Objects.nonNull(authorityRequest.getVisible())) {
+        if (!Objects.nonNull(authorityRequestDto.getVisible())) {
             isValid = false;
             messages.append(ValidationMessages.AUTHORITY_IS_VISIBLE_NOT_NULL);
             messages.append(System.lineSeparator());
@@ -62,20 +62,20 @@ public class AuthorityRulesImpl implements AuthorityRules {
             throw new ValidationException(messages.toString());
         }
 
-        authorityService.save(authorityRequest);
+        authorityService.save(authorityRequestDto);
     }
 
     @Override
-    public void update(Long authorityId, AuthorityRequest authorityRequest) {
+    public void update(Long authorityId, AuthorityRequestDto authorityRequestDto) {
         StringBuilder messages = new StringBuilder();
         boolean isValid = true;
-        if (!Objects.nonNull(authorityRequest)) {
+        if (!Objects.nonNull(authorityRequestDto)) {
             messages.append(ValidationMessages.AUTHORITY_NOT_NULL);
             messages.append(System.lineSeparator());
             throw new ValidationException(messages.toString());
         }
         if (shouldIconExist(authorityId)) {
-            if (!ValidationHelper.isValid(authorityRequest.getIcon())) {
+            if (!ValidationHelper.isValid(authorityRequestDto.getIcon())) {
                 isValid = false;
                 messages.append(ValidationMessages.AUTHORITY_ICON_NOT_NULL);
                 messages.append(System.lineSeparator());
@@ -90,7 +90,7 @@ public class AuthorityRulesImpl implements AuthorityRules {
             throw new ValidationException(messages.toString());
         }
 
-        authorityService.update(authorityId, authorityRequest);
+        authorityService.update(authorityId, authorityRequestDto);
     }
 
     @Override
@@ -114,15 +114,15 @@ public class AuthorityRulesImpl implements AuthorityRules {
     }
 
     @Override
-    public void assignRoleAuthorities(RoleAuthorityRequest roleAuthorityRequest) {
+    public void assignRoleAuthorities(RoleAuthorityRequestDto roleAuthorityRequestDto) {
         StringBuilder messages = new StringBuilder();
         boolean isValid = true;
-        if (!ValidationHelper.isValid(roleAuthorityRequest.getRoleId())) {
+        if (!ValidationHelper.isValid(roleAuthorityRequestDto.getRoleId())) {
             isValid = false;
             messages.append(ValidationMessages.ROLE_ID_NOT_NULL);
             messages.append(System.lineSeparator());
         }
-        if (!ValidationHelper.isValid(roleAuthorityRequest.getAuthorityIds())) {
+        if (!ValidationHelper.isValid(roleAuthorityRequestDto.getAuthorityIds())) {
             isValid = false;
             messages.append(ValidationMessages.AUTHORITY_ID_LIST_NOT_NULL);
             messages.append(System.lineSeparator());
@@ -132,7 +132,7 @@ public class AuthorityRulesImpl implements AuthorityRules {
             throw new ValidationException(messages.toString());
         }
 
-        authorityService.assignRoleAuthorities(roleAuthorityRequest);
+        authorityService.assignRoleAuthorities(roleAuthorityRequestDto);
     }
 
     @Override

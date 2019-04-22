@@ -1,12 +1,12 @@
 package com.patent.evaluator.service.api.login;
 
 import com.patent.evaluator.domain.Users;
-import com.patent.evaluator.dto.LoginRequest;
+import com.patent.evaluator.dto.LoginRequestDto;
 
 public interface LoginRules {
 
-    Users login(LoginRequest loginRequest) throws Exception;
+    Users login(LoginRequestDto loginRequestDto) throws Exception;
 
-    Users loginLDAP(LoginRequest loginRequest) throws Exception;
+    Users loginLDAP(LoginRequestDto loginRequestDto) throws Exception;
 
 }

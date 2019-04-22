@@ -5,9 +5,9 @@ import com.patent.evaluator.config.ActiveDirectoryHelper;
 import com.patent.evaluator.domain.Authority;
 import com.patent.evaluator.domain.Users;
 import com.patent.evaluator.dto.AuthorityResponse;
-import com.patent.evaluator.dto.LoginRequest;
-import com.patent.evaluator.dto.LoginResponse;
-import com.patent.evaluator.dto.LoginUserResponse;
+import com.patent.evaluator.dto.LoginRequestDto;
+import com.patent.evaluator.dto.LoginResponseDto;
+import com.patent.evaluator.dto.LoginUserResponseDto;
 import com.patent.evaluator.security.JwtUtil;
 import com.patent.evaluator.service.api.authority.AuthorityListRules;
 import com.patent.evaluator.service.api.authority.AuthorityRules;
@@ -37,40 +37,40 @@ public class LoginController {
 
 
     @PostMapping("login")
-    public ResponseEntity login(@RequestBody LoginRequest loginRequest) throws Exception {
+    public ResponseEntity login(@RequestBody LoginRequestDto loginRequestDto) throws Exception {
 
         if (activeDirectoryHelper.getLdapConfig().getEnabled()) {
-            if (activeDirectoryHelper.authenticate(loginRequest.getUsername(), loginRequest.getPassword())) {
-                Users user = loginRules.loginLDAP(loginRequest);
+            if (activeDirectoryHelper.authenticate(loginRequestDto.getUsername(), loginRequestDto.getPassword())) {
+                Users user = loginRules.loginLDAP(loginRequestDto);
                 authorityListRules.authorize(user);
                 List<Authority> authorities = this.authorityRules.getUserAuthorities(user);
-                LoginResponse loginResponse = new LoginResponse();
-                loginResponse.setLoginUserResponse(getUserResponse(user));
-                loginResponse.setAuthorityResponse(getAuthorityResponse(authorities));
+                LoginResponseDto loginResponseDto = new LoginResponseDto();
+                loginResponseDto.setLoginUserResponseDto(getUserResponse(user));
+                loginResponseDto.setAuthorityResponse(getAuthorityResponse(authorities));
 
                 HttpHeaders headers = new HttpHeaders();
                 String token = jwtUtil.generateTokenWithId(user);
                 headers.set("Authorization", StringAppenderUtil.append("Bearer ", token));
-                loginResponse.setToken(token);
-                return new ResponseEntity<>(loginResponse, headers, HttpStatus.OK);
+                loginResponseDto.setToken(token);
+                return new ResponseEntity<>(loginResponseDto, headers, HttpStatus.OK);
             } else {
-                LoginResponse loginResponse = new LoginResponse();
-                return new ResponseEntity<>(loginResponse, HttpStatus.UNAUTHORIZED);
+                LoginResponseDto loginResponseDto = new LoginResponseDto();
+                return new ResponseEntity<>(loginResponseDto, HttpStatus.UNAUTHORIZED);
             }
 
         } else {
-            Users user = loginRules.login(loginRequest);
+            Users user = loginRules.login(loginRequestDto);
             authorityListRules.authorize(user);
             List<Authority> authorities = this.authorityRules.getUserAuthorities(user);
-            LoginResponse loginResponse = new LoginResponse();
-            loginResponse.setLoginUserResponse(getUserResponse(user));
-            loginResponse.setAuthorityResponse(getAuthorityResponse(authorities));
+            LoginResponseDto loginResponseDto = new LoginResponseDto();
+            loginResponseDto.setLoginUserResponseDto(getUserResponse(user));
+            loginResponseDto.setAuthorityResponse(getAuthorityResponse(authorities));
 
             HttpHeaders headers = new HttpHeaders();
             String token = jwtUtil.generateTokenWithId(user);
             headers.set("Authorization", StringAppenderUtil.append("Bearer ", token));
-            loginResponse.setToken(token);
-            return new ResponseEntity<>(loginResponse, headers, HttpStatus.OK);
+            loginResponseDto.setToken(token);
+            return new ResponseEntity<>(loginResponseDto, headers, HttpStatus.OK);
         }
 
     }
@@ -95,15 +95,15 @@ public class LoginController {
         return new ResponseEntity<>(true, responseCode);
     }
 
-    private LoginUserResponse getUserResponse(Users user) {
-        LoginUserResponse loginUserResponse = new LoginUserResponse();
-        loginUserResponse.setUserId(user.getId());
-        loginUserResponse.setSurname(user.getSurname());
-        loginUserResponse.setName(user.getFirstname());
-        loginUserResponse.setUsername(user.getUsername());
-        loginUserResponse.setPasswordTemporary(user.getPasswordTemporary());
+    private LoginUserResponseDto getUserResponse(Users user) {
+        LoginUserResponseDto loginUserResponseDto = new LoginUserResponseDto();
+        loginUserResponseDto.setUserId(user.getId());
+        loginUserResponseDto.setSurname(user.getSurname());
+        loginUserResponseDto.setName(user.getFirstname());
+        loginUserResponseDto.setUsername(user.getUsername());
+        loginUserResponseDto.setPasswordTemporary(user.getPasswordTemporary());
 
-        return loginUserResponse;
+        return loginUserResponseDto;
     }
 
     private List<AuthorityResponse> getAuthorityResponse(List<Authority> authorities) {

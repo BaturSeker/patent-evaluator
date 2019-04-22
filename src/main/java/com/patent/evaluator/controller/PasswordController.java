@@ -2,9 +2,9 @@ package com.patent.evaluator.controller;
 
 
 import com.patent.evaluator.constant.SuccessMessages;
-import com.patent.evaluator.dto.SetNewPasswordRequest;
+import com.patent.evaluator.dto.SetNewPasswordRequestDto;
 import com.patent.evaluator.dto.SuccessResponseDto;
-import com.patent.evaluator.dto.UserRequest;
+import com.patent.evaluator.dto.UserRequestDto;
 import com.patent.evaluator.service.api.password.PasswordRules;
 import com.patent.evaluator.util.PasswordGenerator;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -36,17 +36,17 @@ public class PasswordController {
 
     @PostMapping(value = "validatePassword")
     @PreAuthorize("@CheckPermission.hasPermission(authentication)")
-    public ResponseEntity validatePassword(@Valid @RequestBody UserRequest userRequest) {
-        passwordRules.passwordValidation(userRequest);
+    public ResponseEntity validatePassword(@Valid @RequestBody UserRequestDto userRequestDto) {
+        passwordRules.passwordValidation(userRequestDto);
         return new ResponseEntity<>(new SuccessResponseDto(SuccessMessages.VALIDATE_PASSWORD_TITLE, SuccessMessages.VALIDATE_PASSWORD_MESSAGE), HttpStatus.OK);
 
     }
 
     @PutMapping(value = "setNewPassword/{userId}")
     @PreAuthorize("@CheckPermission.hasPermission(authentication)")
-    public ResponseEntity setNewPassword(@PathVariable Long userId, @Valid @RequestBody SetNewPasswordRequest setNewPasswordRequest) throws NoSuchAlgorithmException {
-        setNewPasswordRequest.setUserId(userId);
-        passwordRules.setNewPassword(setNewPasswordRequest);
+    public ResponseEntity setNewPassword(@PathVariable Long userId, @Valid @RequestBody SetNewPasswordRequestDto setNewPasswordRequestDto) throws NoSuchAlgorithmException {
+        setNewPasswordRequestDto.setUserId(userId);
+        passwordRules.setNewPassword(setNewPasswordRequestDto);
         return new ResponseEntity<>(new SuccessResponseDto(SuccessMessages.NEW_PASSWORD_TITLE, SuccessMessages.NEW_PASSWORD_MESSAGE), HttpStatus.OK);
     }
 

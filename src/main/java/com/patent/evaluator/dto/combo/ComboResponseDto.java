@@ -3,7 +3,7 @@ package com.patent.evaluator.dto.combo;
 import lombok.EqualsAndHashCode;
 
 @EqualsAndHashCode
-public class ComboResponse {
+public class ComboResponseDto {
 
     private String value;
     private String text;

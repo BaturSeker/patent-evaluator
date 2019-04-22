@@ -1,14 +1,14 @@
 package com.patent.evaluator.service.api.password;
 
 import com.patent.evaluator.domain.Users;
-import com.patent.evaluator.dto.SetNewPasswordRequest;
-import com.patent.evaluator.dto.UserRequest;
+import com.patent.evaluator.dto.SetNewPasswordRequestDto;
+import com.patent.evaluator.dto.UserRequestDto;
 
 import java.security.NoSuchAlgorithmException;
 import java.util.List;
 
 public interface PasswordRules {
-    void passwordValidation(UserRequest userRequest);
+    void passwordValidation(UserRequestDto userRequestDto);
 
     boolean isPasswordValid(String password);
 
@@ -18,7 +18,7 @@ public interface PasswordRules {
 
     void setIsTemproraryPassword(List<Users> users) throws NoSuchAlgorithmException;
 
-    void setNewPassword(SetNewPasswordRequest setNewPasswordRequest) throws NoSuchAlgorithmException;
+    void setNewPassword(SetNewPasswordRequestDto setNewPasswordRequestDto) throws NoSuchAlgorithmException;
 
     void resetPassword(Long userId) throws NoSuchAlgorithmException;
 

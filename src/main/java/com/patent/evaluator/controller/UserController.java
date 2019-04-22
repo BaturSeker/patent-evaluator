@@ -5,8 +5,8 @@ import com.patent.evaluator.domain.UserRole;
 import com.patent.evaluator.domain.Users;
 import com.patent.evaluator.dto.ResetPasswordDto;
 import com.patent.evaluator.dto.SuccessResponseDto;
-import com.patent.evaluator.dto.UserInfoResponse;
-import com.patent.evaluator.dto.UserResponse;
+import com.patent.evaluator.dto.UserInfoResponseDto;
+import com.patent.evaluator.dto.UserResponseDto;
 import com.patent.evaluator.pageablesearch.model.PageRequestDto;
 import com.patent.evaluator.pageablesearch.model.PageableSearchFilterDto;
 import com.patent.evaluator.service.api.authority.AuthorityListRules;
@@ -41,17 +41,17 @@ public class UserController {
     public ResponseEntity getUser(@PathVariable Long userId) {
         try {
             Users user = userRules.getUser(userId);
-            UserResponse userResponse = new UserResponse();
-            userResponse.setUsername(user.getUsername());
-            userResponse.setName(user.getFirstname());
-            userResponse.setSurname(user.getSurname());
-            userResponse.setUserId(user.getId());
-            userResponse.setTemporaryPassword(user.getPasswordTemporary());
-            userResponse.setPhone(user.getTelephone());
-            userResponse.setEmail(user.getEmail());
-            userResponse.setActive(user.getActive());
+            UserResponseDto userResponseDto = new UserResponseDto();
+            userResponseDto.setUsername(user.getUsername());
+            userResponseDto.setName(user.getFirstname());
+            userResponseDto.setSurname(user.getSurname());
+            userResponseDto.setUserId(user.getId());
+            userResponseDto.setTemporaryPassword(user.getPasswordTemporary());
+            userResponseDto.setPhone(user.getTelephone());
+            userResponseDto.setEmail(user.getEmail());
+            userResponseDto.setActive(user.getActive());
 
-            return new ResponseEntity<>(userResponse, HttpStatus.OK);
+            return new ResponseEntity<>(userResponseDto, HttpStatus.OK);
         } catch (Exception e) {
             // TODO baseController handleException metodu silindi
             throw e;
@@ -90,13 +90,13 @@ public class UserController {
     }
 
     @PostMapping("getUserInfoPage")
-    public ResponseEntity<Page<UserInfoResponse>> getUserInfoPage(@RequestBody PageRequestDto pageRequest) {
+    public ResponseEntity<Page<UserInfoResponseDto>> getUserInfoPage(@RequestBody PageRequestDto pageRequest) {
         return ResponseEntity.ok(userRules.getUserInfoPage(PageRequest.of(pageRequest.getPage(), pageRequest.getSize())));
     }
 
     @PostMapping("getFilteredUsers")
-    public ResponseEntity<Page<UserInfoResponse>> getFilteredUsers(@RequestBody PageableSearchFilterDto pageRequest) {
-        Page<UserInfoResponse> response = userRules.getUsersFiltered(pageRequest);
+    public ResponseEntity<Page<UserInfoResponseDto>> getFilteredUsers(@RequestBody PageableSearchFilterDto pageRequest) {
+        Page<UserInfoResponseDto> response = userRules.getUsersFiltered(pageRequest);
         return ResponseEntity.ok(response);
     }
 

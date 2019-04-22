@@ -1,6 +1,6 @@
 package com.patent.evaluator.dto;
 
-public class AuthorityRequest {
+public class AuthorityRequestDto {
     private Long parentId;
     private String title;
     private String authorizeCode;
