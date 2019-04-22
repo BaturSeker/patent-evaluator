@@ -37,7 +37,7 @@ dependencies {
     // https://mvnrepository.com/artifact/org.springframework.boot/spring-boot-starter
     implementation group: 'org.springframework.boot', name: 'spring-boot-starter', version: '2.1.4.RELEASE'
 
-    compile 'org.mapstruct:mapstruct-jdk8:1.2.0.Final'
+    implementation 'org.mapstruct:mapstruct-jdk8:1.2.0.Final'
     annotationProcessor 'org.mapstruct:mapstruct-processor:1.2.0.Final'
     testAnnotationProcessor 'org.mapstruct:mapstruct-processor:1.2.0.Final'
 

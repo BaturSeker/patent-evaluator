@@ -2,10 +2,10 @@ package com.patent.evaluator.constant;
 
 public final class SuccessMessages {
 
-    // # USER
+    //  # USER
     public static final String USER_TEMP_PASSWORD_TITLE = "Kullanıcı şifre sıfırlama işlemi.";
 
-    // # ROLE
+    //  # ROLE
     public static final String ROLE_ASSIGN_TITLE = "Kullanıcıya yetki atama.";
     public static final String ROLE_ASSIGN_MESSAGE = "Kullanıcıya yetki atama işlemi başarılı bir şekilde gerçekleştirildi.";
 
@@ -41,4 +41,14 @@ public final class SuccessMessages {
 
     public static final String GENERIC_TYPE_VALUE_UPDATE_TITLE = "Genel Tip değeri güncelleme";
     public static final String GENERIC_TYPE_VALUE_UPDATE_MESSAGE = "Genel Tip değeri başarılı bir şekilde güncellendi.";
+
+    //  # ROLE
+    public static final String ROLE_CREATE_TITLE = "Role Ekleme";
+    public static final String ROLE_CREATE_MESSAGE = "Role başarılı bir şekilde eklenmiştir.";
+
+    public static final String ROLE_UPDATE_TITLE = "Role Güncelleme";
+    public static final String ROLE_UPDATE_MESSAGE = "Role başarılı bir şekilde güncellenmiştir.";
+
+    public static final String ROLE_DELETE_TITLE = "Role Silme";
+    public static final String ROLE_DELETE_MESSAGE = "Role başarılı bir şekilde silinmiştir.";
 }
